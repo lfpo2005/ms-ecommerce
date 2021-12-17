@@ -11,10 +11,11 @@
 	<groupId>lfcode.api.rest</groupId>
 	<artifactId>ms-springApi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ms-springApi</name>
+	<name>ms-authuser</name>
 	<description>Curso Api Rest Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-cloud.version>2021.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -79,11 +80,15 @@
 			<version>5.0.0</version><!--$NO-MVN-MAN-VER$-->
 			<!--  <version>4.0.3</version>-->
 		</dependency>
-		
+
 					
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -99,4 +104,15 @@
 		</plugins>
 	</build>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
