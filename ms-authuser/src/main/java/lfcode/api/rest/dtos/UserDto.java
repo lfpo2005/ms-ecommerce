@@ -15,6 +15,7 @@ public class UserDto {
         public static interface UserPut {}
         public static interface PasswordPut {}
         public static interface ImagePut {}
+		public static interface ShoppingCart {}
     }
 
    
@@ -22,14 +23,7 @@ public class UserDto {
     @Size (min = 4, max = 50, groups = UserView.RegistrationPost.class)
     @JsonView(UserView.RegistrationPost.class)
     private String login;
-    
-    public String getLogin() {
-		return login;
-	}
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
 
 	@NotBlank(groups = UserView.RegistrationPost.class)
     @Email (groups = UserView.RegistrationPost.class)
@@ -51,11 +45,11 @@ public class UserDto {
     
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
     private String phone;
-    
-    @JsonView({UserView.RegistrationPost.class})
+
+	@NotBlank( groups = UserView.ShoppingCart.class)
+    @JsonView({UserView.ShoppingCart.class})
     private String cpf;
     
-    @NotBlank (groups = UserView.ImagePut.class)
     @JsonView(UserView.ImagePut.class)
     private String imageUrl;
 
@@ -114,6 +108,14 @@ public class UserDto {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-    
-    
+
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 }

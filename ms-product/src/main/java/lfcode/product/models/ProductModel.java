@@ -76,7 +76,7 @@ public class ProductModel implements Serializable  {
 	 private LocalDateTime lastUpdateDate;
 	 
 	 @OneToMany(mappedBy = "imageProduct", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-		private List<ImageModel> telefones = new ArrayList<ImageModel>();
+		private List<ImageModel> imagens = new ArrayList<ImageModel>();
 	 
 	 @ManyToOne(targetEntity = SubCategoryModel.class)
 	 @JoinColumn(name = "subCategory_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "subCategory_fx"))
@@ -218,12 +218,12 @@ public class ProductModel implements Serializable  {
 		this.lastUpdateDate = lastUpdateDate;
 	}
 
-	public List<ImageModel> getTelefones() {
-		return telefones;
+	public List<ImageModel> getImagens() {
+		return imagens;
 	}
 
-	public void setTelefones(List<ImageModel> telefones) {
-		this.telefones = telefones;
+	public void setImagens(List<ImageModel> imagens) {
+		this.imagens = imagens;
 	}
 
 	public SubCategoryModel getSubCategoryProduct() {

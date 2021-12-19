@@ -80,12 +80,12 @@ public class SubCategoryModel implements Serializable {
 		this.description = description;
 	}
 
-	public List<ProductModel> getTelefones() {
-		return telefones;
+	public List<ProductModel> getProduct() {
+		return product;
 	}
 
-	public void setTelefones(List<ProductModel> telefones) {
-		this.telefones = telefones;
+	public void setProduct(List<ProductModel> product) {
+		this.product = product;
 	}
 
 	public CategoryModel getCategoryProduct() {
@@ -99,7 +99,7 @@ public class SubCategoryModel implements Serializable {
 	private String description;
 
 	@OneToMany(mappedBy = "subCategoryProduct", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<ProductModel> telefones = new ArrayList<ProductModel>();
+	private List<ProductModel> product = new ArrayList<ProductModel>();
 
 	@ManyToOne(targetEntity = SubCategoryModel.class)
 	@JoinColumn(name = "Category_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "Category_fx"))

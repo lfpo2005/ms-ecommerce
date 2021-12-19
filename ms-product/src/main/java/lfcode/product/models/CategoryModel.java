@@ -28,7 +28,7 @@ public class CategoryModel implements Serializable {
 	private String description;
 
 	@OneToMany(mappedBy = "CategoryProduct", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<SubCategoryModel> telefones = new ArrayList<SubCategoryModel>();
+	private List<SubCategoryModel> subCategory = new ArrayList<SubCategoryModel>();
 
 	@Override
 	public int hashCode() {
@@ -79,12 +79,11 @@ public class CategoryModel implements Serializable {
 		this.description = description;
 	}
 
-	public List<SubCategoryModel> getTelefones() {
-		return telefones;
+	public List<SubCategoryModel> getSubCategory() {
+		return subCategory;
 	}
 
-	public void setTelefones(List<SubCategoryModel> telefones) {
-		this.telefones = telefones;
+	public void setSubCategory(List<SubCategoryModel> subCategory) {
+		this.subCategory = subCategory;
 	}
-
 }

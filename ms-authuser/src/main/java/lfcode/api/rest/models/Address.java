@@ -45,8 +45,8 @@ public class Address implements Serializable  {
 		private String state;	
 		
 		@ManyToOne
-		@JoinColumn(name = "user_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "user_fx"))
-		private UserModel user;
+		@JoinColumn(name = "user_address_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "user_address_fx"))
+		private UserModel userAddress;
 
 		@Override
 		public int hashCode() {
@@ -129,14 +129,11 @@ public class Address implements Serializable  {
 			this.state = state;
 		}
 
-		public UserModel getUser() {
-			return user;
-		}
+	public UserModel getUserAddress() {
+		return userAddress;
+	}
 
-		public void setUser(UserModel user) {
-			this.user = user;
-		}
-		
-		
-
+	public void setUserAddress(UserModel userAddress) {
+		this.userAddress = userAddress;
+	}
 }

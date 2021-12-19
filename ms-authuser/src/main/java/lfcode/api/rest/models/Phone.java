@@ -1,14 +1,6 @@
 package lfcode.api.rest.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,12 +16,11 @@ public class Phone {
 	
 	private String number; 
 	@Column( length = 25)
-	private String type; 
-	
-	@JsonIgnore
-	@ForeignKey(name= "userid")
-	@ManyToOne(optional = false)
-	private UserModel user;
+	private String type;
+
+	@ManyToOne
+	@JoinColumn(name = "phone_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "phone_fx"))
+	private UserModel userPhone;
 
 	public Long getId() {
 		return id;
@@ -55,18 +46,11 @@ public class Phone {
 		this.type = type;
 	}
 
-	public UserModel getUser() {
-		return user;
+	public UserModel getUserphone() {
+		return userPhone;
 	}
 
-	public void setUser(UserModel user) {
-		this.user = user;
+	public void setUserphone(UserModel userphone) {
+		this.userPhone = userphone;
 	}
-	
-	
-	
-	
-	
-	
-	
 }

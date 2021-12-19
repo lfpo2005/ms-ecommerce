@@ -5,7 +5,14 @@
       <list>
         <option value="$PROJECT_DIR$/ms-product/pom.xml" />
         <option value="$PROJECT_DIR$/ms-authuser/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-gateway-zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-eureka-server/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ms-eureka-server/.mvn/wrapper/maven-wrapper.properties" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />

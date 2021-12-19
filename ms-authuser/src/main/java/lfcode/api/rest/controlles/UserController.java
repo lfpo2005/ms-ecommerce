@@ -88,8 +88,8 @@ public class UserController {
 
            var userModel = userOptional.get();
            
-           for (int pos = 0; pos < userModel.getPhone().size(); pos ++ ) {
-        	   userModel.getPhone().get(pos).setUser(userModel);
+           for (int pos = 0; pos < userModel.getUserPhone().size(); pos ++ ) {
+        	   userModel.getUserPhone().get(pos).setUserphone(userModel);
 	        }
            
            userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));

@@ -1,43 +1,22 @@
 package lfcode.api.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lfcode.api.rest.enums.UserStatus;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ConstraintMode;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lfcode.api.rest.enums.UserStatus;
+import java.util.Set;
 
 
 @Entity
 @Table(name= "TB_USERS")
-public class UserModel implements UserDetails  {
+public class UserModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,20 +25,21 @@ public class UserModel implements UserDetails  {
 	@Column(nullable = false, length = 150)
     private String fullName;
 	
-	@Column(nullable = false, unique = true, length = 50)
+	@Column(unique = true, length = 50)
 	private String email;
 	
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
 	private UserStatus UserStatus;
 	
-	@Column(nullable = false, unique = true, length = 20)
+	@Column(unique = true, length = 20)
 	private String login;
 	
 	private String password;
 	
 	private String token;
-	@Column(nullable = false, unique = true, length = 20)
+
+	@Column(unique = true, length = 20)
 	private String cpf;
 	
 	@Column(length = 500)
@@ -73,36 +53,22 @@ public class UserModel implements UserDetails  {
 	 private LocalDateTime lastUpdateDate;
 	 
 	 @Column(nullable = false)
-	 @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	 private List<Phone> phone = new ArrayList<Phone>();
+	 @OneToMany(mappedBy = "userPhone", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	 private List<Phone> userPhone = new ArrayList<Phone>();
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	 @JoinTable(name = "user_role", uniqueConstraints = @UniqueConstraint(
-			 columnNames = {"user_id", "role_id"},
-			 name = "unique_role_user"),
-	 		 joinColumns = @JoinColumn(name = "user_id",
-	 		 referencedColumnName = "id",
-	 		 table = "TB_USERS", unique = false,
-			 foreignKey = @ForeignKey(name = "user_fk", 
-			 value = ConstraintMode.CONSTRAINT)),
-			 inverseJoinColumns = @JoinColumn (
-					 name = "role_id", referencedColumnName = "id",
-					 table = "TB_ROLES",
-					 unique = false, updatable = false,
-			 foreignKey = @ForeignKey(
-					 name = "role_fk",
-					 value = ConstraintMode.CONSTRAINT)))
-	 private List<Role> roles = new ArrayList<>();
+	@Column(nullable = false)
+	@OneToMany(mappedBy = "userAddress", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Address> userAddress = new ArrayList<Address>();
+
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_user_role",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")
+	)
+	private Set<Role> roles = new HashSet<>();
 	 
 	 
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -161,13 +127,7 @@ public class UserModel implements UserDetails  {
 		this.cpf = cpf;
 	}
 
-	public List<Phone> getPhone() {
-		return phone;
-	}
 
-	public void setPhone(List<Phone> phone) {
-		this.phone = phone;
-	}
 
 	@Override
 	public int hashCode() {
@@ -193,8 +153,6 @@ public class UserModel implements UserDetails  {
 			return false;
 		return true;
 	}
-	
-	
 
 	public String getFullName() {
 		return fullName;
@@ -220,30 +178,12 @@ public class UserModel implements UserDetails  {
 		this.imageUrl = imageUrl;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
-	@JsonIgnore
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-	
-	@JsonIgnore
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-	@JsonIgnore
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-	@JsonIgnore
-	@Override
-	public boolean isEnabled() {
-		return true;
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	public String getLogin() {
@@ -254,11 +194,19 @@ public class UserModel implements UserDetails  {
 		this.login = login;
 	}
 
-	@JsonIgnore
-	@Override
-	public String getUsername() {
-		
-		return login;
+	public List<Phone> getUserPhone() {
+		return userPhone;
 	}
-	
+
+	public void setUserPhone(List<Phone> userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public List<Address> getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(List<Address> userAddress) {
+		this.userAddress = userAddress;
+	}
 }
