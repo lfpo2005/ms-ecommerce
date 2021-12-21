@@ -6,10 +6,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 @EnableConfigServer
 @SpringBootApplication
-public class MsConfigServerApplication {
+public class MsEcommerceConfigServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MsConfigServerApplication.class, args);
+        SpringApplication.run(MsEcommerceConfigServerApplication.class, args);
     }
 
 }
