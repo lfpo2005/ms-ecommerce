@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ms-authuser/ms-authuser.iml" filepath="$PROJECT_DIR$/ms-authuser/ms-authuser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-config-server/ms-config-server.iml" filepath="$PROJECT_DIR$/ms-config-server/ms-config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ms-ecommerce.iml" filepath="$PROJECT_DIR$/.idea/ms-ecommerce.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ms-ecommerce-config-server/ms-ecommerce-config-server.iml" filepath="$PROJECT_DIR$/ms-ecommerce-config-server/ms-ecommerce-config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-eureka-server/ms-eureka-server.iml" filepath="$PROJECT_DIR$/ms-eureka-server/ms-eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-gateway-zuul/ms-gateway-zuul.iml" filepath="$PROJECT_DIR$/ms-gateway-zuul/ms-gateway-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-product/ms-product.iml" filepath="$PROJECT_DIR$/ms-product/ms-product.iml" />
